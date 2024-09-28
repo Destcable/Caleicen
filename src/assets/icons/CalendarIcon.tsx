@@ -2,7 +2,7 @@ export const CalendarIcon = (size?: number, color?: string): JSX.Element => (
     <svg 
         stroke="currentColor" 
         fill={color} 
-        stroke-width="0" 
+        strokeWidth="0" 
         viewBox="0 0 16 16" 
         height={size} 
         width={size} 

@@ -1,8 +1,8 @@
 export const InboxIcon = (size?: number, color?: string) => (
     <svg 
-        stroke={color} fill="none" stroke-width="2" 
-        viewBox="0 0 24 24" stroke-linecap="round" 
-        stroke-linejoin="round" height={size} width={size} 
+        stroke={color} fill="none" strokeWidth="2" 
+        viewBox="0 0 24 24" strokeLinecap="round" 
+        strokeLinejoin="round" height={size} width={size} 
         xmlns="http://www.w3.org/2000/svg"
     >
             <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>

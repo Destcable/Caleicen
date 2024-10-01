@@ -1,8 +1,6 @@
-import { FC } from "react";
-
 export type SidebarItemOption = { 
     value: string;
-    icon: FC;
+    icon: () => JSX.Element;
     label: string,
     iconSize: number,
     color?: string

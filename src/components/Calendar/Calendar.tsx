@@ -28,7 +28,7 @@ export const CalendarDayView: FC<CalendarDayViewProps> = ({ times }) => {
                 <div className="relative w-full">
                     <div className="grid border-l" style={{ gridTemplateRows: `repeat(${times.length}, minmax(${HEIGHT_ROW_CALENDAR}rem, 1fr))` }}>
                         {times.map((item, index) => (
-                            <div key={index} className="border-b sticky relative">
+                            <div key={index} className="border-b">
                                 <span className="-ml-12 absolute">{item.time}</span>
                             </div>
                         ))}

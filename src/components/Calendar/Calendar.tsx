@@ -1,9 +1,5 @@
 import { FC } from "react";
-
-interface Event {
-    startedAt: string;
-    finishedAt: string;
-}
+import { Event } from "../../core/types/Event";
 
 interface CalendarDayViewProps {
     times: { time: string }[];
@@ -26,9 +22,9 @@ export const CalendarDayView: FC<CalendarDayViewProps> = ({ times }) => {
     const getIndex = (time: string) => times.findIndex(t => t.time === time);
 
     return (
-        <div className="flex flex-col flex-1 overflow-auto ml-10">
+        <div className="flex flex-col flex-1 overflow-auto ">
             <div className="flex w-full flex-1">
-                <div className="w-20"></div>
+                <div className="w-12"></div>
                 <div className="relative w-full">
                     <div className="grid border-l" style={{ gridTemplateRows: `repeat(${times.length}, minmax(${HEIGHT_ROW_CALENDAR}rem, 1fr))` }}>
                         {times.map((item, index) => (

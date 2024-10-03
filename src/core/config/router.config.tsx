@@ -1,9 +1,9 @@
 import { lazy } from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 
 const CalendarDayPage = lazy(() => import("../../pages/CalendarDayPage/CalendarDayPage"));
-// const AuthPage = lazy(() => import("@pages/Auth/AuthPage"))
+const AuthPage = lazy(() => import("../../pages/AuthPage/AuthPage"));
 
 const router = createBrowserRouter([
     {
@@ -11,15 +11,19 @@ const router = createBrowserRouter([
         element: <Layout />,
         children: [
             {
+                index: true,
+                element: <Navigate to="calendar/day" replace />
+            },
+            {
                 path: 'calendar/day',
                 element: <CalendarDayPage />,
             },
         ],
     },
-    // {
-    //     path: 'auth',
-    //     element: <AuthPage />
-    // }
+    {
+        path: 'auth',
+        element: <AuthPage />
+    }
 ]);
 
 export default router;

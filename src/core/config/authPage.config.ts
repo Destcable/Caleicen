@@ -1,0 +1,1 @@
+export const AUTH_BACKGROUND_COLOR = "#f5f5f5"

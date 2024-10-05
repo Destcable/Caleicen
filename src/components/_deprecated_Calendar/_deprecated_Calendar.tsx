@@ -5,7 +5,7 @@ interface CalendarDayViewProps {
     times: { time: string }[];
 }
 
-export const CalendarDayView: FC<CalendarDayViewProps> = ({ times }) => {
+export const _deprecated_CalendarDayView: FC<CalendarDayViewProps> = ({ times }) => {
     const events: Event[] = [
         {
             startedAt: "03:00",

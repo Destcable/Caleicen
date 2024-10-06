@@ -5,10 +5,15 @@ import { SidebarItem } from "../Sidebar/SidebarItem";
 import { SidebarItems } from "../Sidebar/SidebarItems";
 import { Navigate, Outlet } from "react-router-dom";
 import { APP_ROUTE_LOGIN } from "../../core/config/app.config";
+import { useLocalStorage } from "../../core/hooks/useLocalStorage";
 
 const Layout = () => {
-    const [selectedSidebarItem, setSelectedSidebarItem] = useState<string>("Calendar");
-
+    const [selectedSidebarItem, setSelectedSidebarItem] = useState<string>("Dashboard");
+    
+    const [userEmail] = useLocalStorage('user-email')
+    const [userPassword] = useLocalStorage('user-password')
+    
+    console.log(userEmail)
     const handleClickSidebarItem = (value: string) => setSelectedSidebarItem(value);
 
     const items = sidebarItemsOptions.map((item, index) => <SidebarItem
@@ -24,7 +29,7 @@ const Layout = () => {
         {items}
     </SidebarItems>;
     
-    if (!localStorage.getItem('user-email') || !localStorage.getItem('user-password')) return <Navigate to={APP_ROUTE_LOGIN} replace />;
+    if (!userEmail || !userPassword) return <Navigate to={APP_ROUTE_LOGIN} replace />;
     
     return (
         <div className="flex h-screen">

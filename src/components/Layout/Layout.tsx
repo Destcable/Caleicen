@@ -3,9 +3,11 @@ import { sidebarItemsOptions } from "../../core/config/sidebarItemsOptions.confi
 import { Sidebar } from "../Sidebar/Sidebar";
 import { SidebarItem } from "../Sidebar/SidebarItem";
 import { SidebarItems } from "../Sidebar/SidebarItems";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { APP_ROUTE_LOGIN } from "../../core/config/app.config";
 
 const Layout = () => {
+    const navigate = useNavigate();
     const [selectedSidebarItem, setSelectedSidebarItem] = useState<string>("Calendar");
 
     const handleClickSidebarItem = (value: string) => setSelectedSidebarItem(value);
@@ -22,17 +24,21 @@ const Layout = () => {
     const SidebarItemsList = <SidebarItems value={selectedSidebarItem}>
         {items}
     </SidebarItems>;
-
+    
+    if (!localStorage.getItem('user-email') || !localStorage.getItem('user-password')) return <Navigate to={APP_ROUTE_LOGIN} replace />;
+    
     return (
         <div className="flex h-screen">
-            <Sidebar
-                items={SidebarItemsList}
-            />
+                <>
+                    <Sidebar
+                        items={SidebarItemsList}
+                    />
 
 
-            <div className="flex-1 p-4">
-                <Outlet />
-            </div>
+                    <div className="flex-1 p-4">
+                        <Outlet />
+                    </div>
+                </>
         </div>
     )
 };

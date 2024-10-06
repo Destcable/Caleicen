@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
+import { APP_ROUTE_LOGIN, APP_ROUTE_MAIN } from "./app.config";
 
 const CalendarDayPage = lazy(() => import("../../pages/CalendarDayPage/CalendarDayPage"));
 const AuthPage = lazy(() => import("../../pages/AuthPage/AuthPage"));
@@ -12,7 +13,7 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Navigate to="calendar/day" replace />
+                element: <Navigate to={APP_ROUTE_MAIN} replace />
             },
             {
                 path: 'calendar/day',
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
         ],
     },
     {
-        path: 'auth',
+        path: APP_ROUTE_LOGIN,
         element: <AuthPage />
     }
 ]);

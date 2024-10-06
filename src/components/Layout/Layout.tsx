@@ -9,7 +9,6 @@ import { useLocalStorage } from "../../core/hooks/useLocalStorage";
 
 const Layout = () => {
     const [selectedSidebarItem, setSelectedSidebarItem] = useState<string>("Dashboard");
-    
     const [userEmail] = useLocalStorage('user-email')
     const [userPassword] = useLocalStorage('user-password')
     

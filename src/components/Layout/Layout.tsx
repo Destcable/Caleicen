@@ -6,13 +6,17 @@ import { SidebarItems } from "../Sidebar/SidebarItems";
 import { Navigate, Outlet } from "react-router-dom";
 import { APP_ROUTE_LOGIN } from "../../core/config/app.config";
 import { useLocalStorage } from "../../core/hooks/useLocalStorage";
+import { useQuery } from "@apollo/client";
+import { VERIFY_USER_QUERY } from "../../core/api/auth/verifyUserQuery";
+import { LoadingIcon } from "../../assets/icons/LoadingIcon";
 
 const Layout = () => {
     const [selectedSidebarItem, setSelectedSidebarItem] = useState<string>("Dashboard");
-    const [userEmail] = useLocalStorage('user-email')
-    const [userPassword] = useLocalStorage('user-password')
+    const [userToken] = useLocalStorage('user-token')
+    const { data, loading } = useQuery(VERIFY_USER_QUERY, { variables: { input: { token: userToken } }})
     
-    console.log(userEmail)
+    if (loading) return <LoadingIcon />
+
     const handleClickSidebarItem = (value: string) => setSelectedSidebarItem(value);
 
     const items = sidebarItemsOptions.map((item, index) => <SidebarItem
@@ -28,7 +32,7 @@ const Layout = () => {
         {items}
     </SidebarItems>;
     
-    if (!userEmail || !userPassword) return <Navigate to={APP_ROUTE_LOGIN} replace />;
+    if (!data?.data?.status) return <Navigate to={APP_ROUTE_LOGIN} replace />;
     
     return (
         <div className="flex h-screen">

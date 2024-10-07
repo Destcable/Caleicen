@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AuthForm, IAuthFormInput } from "../../components/AuthForm/AuthForm";
 import { IconApp } from "../../components/IconApp/IconApp";
-import { APP_NAME } from "../../core/config/app.config";
+import { APP_NAME, APP_ROUTE_MAIN } from "../../core/config/app.config";
 import { AUTH_BACKGROUND_COLOR } from "../../core/config/authPage.config";
 import { useAuthUser } from "../../core/hooks/useAuthUser";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,7 @@ const AuthPage = () => {
         localStorage.setItem('user-password', password);
         localStorage.setItem('user-token', token);
 
-        navigate("/")
+        navigate(APP_ROUTE_MAIN)
     };
 
     return (

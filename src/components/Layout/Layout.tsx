@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { sidebarItemsOptions } from "../../core/config/sidebarItemsOptions.config";
 import { Sidebar } from "../Sidebar/Sidebar";
 import { SidebarItem } from "../Sidebar/SidebarItem";
 import { SidebarItems } from "../Sidebar/SidebarItems";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { APP_ROUTE_LOGIN } from "../../core/config/app.config";
 import { useLocalStorage } from "../../core/hooks/useLocalStorage";
 import { useQuery } from "@apollo/client";
@@ -12,12 +12,17 @@ import { LoadingIcon } from "../../assets/icons/LoadingIcon";
 
 const Layout = () => {
     const [selectedSidebarItem, setSelectedSidebarItem] = useState<string>("Dashboard");
-    const [userToken] = useLocalStorage('user-token')
-    const { data, loading } = useQuery(VERIFY_USER_QUERY, { variables: { input: { token: userToken } }})
+    const navigate = useNavigate();
+    const [userToken] = useLocalStorage('user-token');
+    const { data, loading } = useQuery(VERIFY_USER_QUERY, { variables: { input: { token: userToken } }});
     
     if (loading) return <LoadingIcon />
 
-    const handleClickSidebarItem = (value: string) => setSelectedSidebarItem(value);
+    const handleClickSidebarItem = (value: string) => { 
+        setSelectedSidebarItem(value);
+        if (value === "Dashboard") navigate('/')
+        if (value === "Calendar") navigate('/calendar/day')
+    }
 
     const items = sidebarItemsOptions.map((item, index) => <SidebarItem
         key={index}
@@ -43,7 +48,9 @@ const Layout = () => {
 
 
                     <div className="flex-1 p-4">
-                        <Outlet />
+                        <Suspense fallback={<LoadingIcon />}>
+                            <Outlet />
+                        </Suspense>
                     </div>
                 </>
         </div>

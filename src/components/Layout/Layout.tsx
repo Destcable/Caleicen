@@ -5,15 +5,15 @@ import { SidebarItem } from "../Sidebar/SidebarItem";
 import { SidebarItems } from "../Sidebar/SidebarItems";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { APP_ROUTE_LOGIN } from "../../core/config/app.config";
-import { useLocalStorage } from "../../core/hooks/useLocalStorage";
 import { useQuery } from "@apollo/client";
 import { VERIFY_USER_QUERY } from "../../core/api/auth/verifyUserQuery";
 import { LoadingIcon } from "../../assets/icons/LoadingIcon";
+import { getStorageAuth } from "../../core/storage/getStorageAuth";
 
 const Layout = () => {
     const [selectedSidebarItem, setSelectedSidebarItem] = useState<string>("Dashboard");
     const navigate = useNavigate();
-    const [userToken] = useLocalStorage('user-token');
+    const { userToken } = getStorageAuth();
     const { data, loading } = useQuery(VERIFY_USER_QUERY, { variables: { input: { token: userToken } }});
     
     if (loading) return <LoadingIcon />

@@ -5,6 +5,7 @@ import { APP_NAME, APP_ROUTE_MAIN } from "../../core/config/app.config";
 import { AUTH_BACKGROUND_COLOR } from "../../core/config/authPage.config";
 import { useAuthUser } from "../../core/hooks/useAuthUser";
 import { useNavigate } from "react-router-dom";
+import { setStorageAuth } from "../../core/storage/setStorageAuth";
 
 const AuthPage = () => {
     const { handleSubmit, register } = useForm<IAuthFormInput>();
@@ -15,11 +16,13 @@ const AuthPage = () => {
 
         const { data } = await login(email, password);
         if (!data || !data.token) alert('Error')
+        const userId = data.user.id;
         const token = data.token;
-
-        localStorage.setItem('user-email', email);
-        localStorage.setItem('user-password', password);
-        localStorage.setItem('user-token', token);
+        
+        setStorageAuth.setUserId(userId);
+        setStorageAuth.setUserEmail(email);
+        setStorageAuth.setUserPassword(password);
+        setStorageAuth.setUserToken(token);
 
         navigate(APP_ROUTE_MAIN)
     };

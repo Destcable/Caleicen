@@ -7,7 +7,6 @@ const events = [
     {
         start: moment().toDate(),
         end: moment()
-            .add(1, "days")
             .toDate(),
         title: "Созвон"
     }

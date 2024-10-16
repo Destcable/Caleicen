@@ -1,36 +1,33 @@
-import { FC, ReactNode } from "react"
-import { SidebarHeader } from "./SidebarHeader"
-import { SidebarSearchInput } from "./SidebarSearchInput"
-import { SidebarUserInfo } from "./SidebarUserInfo"
-import { SidebarWrapper } from "./SidebarWrapper"
+import { FC, ReactNode } from "react";
+import { Box } from "@mui/material";
+import { SidebarHeader } from "./SidebarHeader";
+import { SidebarSearchInput } from "./SidebarSearchInput";
+import { SidebarUserInfo } from "./SidebarUserInfo";
+import { SidebarWrapper } from "./SidebarWrapper";
 
 interface SidebarProps {
-    items?: ReactNode
+    items?: ReactNode;
 }
 
-export const Sidebar: FC<SidebarProps> = ({
-    items,
-}) => {
+export const Sidebar: FC<SidebarProps> = ({ items }) => {
     return (
         <SidebarWrapper>
-            <div>
-                <div className="mb-8">
+            <Box>
+                <Box sx={{ marginBottom: 4 }}>
                     <SidebarHeader />
-                    <div>
+                    <Box>
                         <SidebarSearchInput />
-                    </div>
-                </div>
+                    </Box>
+                </Box>
 
-                <nav className="flex flex-col ">
+                <Box component="nav" sx={{ display: 'flex', flexDirection: 'column' }}>
                     {items}
-                </nav>
+                </Box>
+            </Box>
 
-            </div>
-
-
-            <div>
+            <Box>
                 <SidebarUserInfo />
-            </div>
+            </Box>
         </SidebarWrapper>
-    )
-}
+    );
+};

@@ -1,32 +1,58 @@
 import { FC, ReactNode } from "react";
-import { Icon } from "../Icon/Icon";
+import { Button, Box } from "@mui/material";
+import { Icon } from '@mui/material';
 import { SIDEBAR_ITEM_ACTIVE_COLOR, SIDEBAR_ITEM_NO_ACTIVE_COLOR } from "../../core/config/sidebar.config";
 
 export interface SidebarItemProps {
-    children: ReactNode
-    onClick: (value: string) => void
-    value: string
-    icon?: () => JSX.Element
-    iconSize?: number
-    isActive?: boolean
+    children: ReactNode;
+    onClick: (value: string) => void;
+    value: string;
+    icon?: () => JSX.Element;  // Передаем компонент иконки
+    iconSize?: number;         // Размер иконки
+    isActive?: boolean;
 }
 
 export const SidebarItem: FC<SidebarItemProps> = ({
     children,
     value,
     onClick,
-    icon,
-    iconSize,
+    icon: IconComponent,       // Переименуем в IconComponent для удобства
+    iconSize = 24,             // По умолчанию 24px, если не передан
     isActive = false
 }) => {
-    return <button
-        className={`flex items-center w-full gap-2 text-sm text-left py-2 px-4 
-        ${isActive && 'bg-gray-100 rounded-lg'}
-    `}
-        style={{ color: `${isActive ? SIDEBAR_ITEM_ACTIVE_COLOR : SIDEBAR_ITEM_NO_ACTIVE_COLOR}` }}
-        onClick={() => onClick(value)}
-    >
-        {icon && <Icon icon={icon} size={iconSize} color={isActive ? SIDEBAR_ITEM_ACTIVE_COLOR : SIDEBAR_ITEM_NO_ACTIVE_COLOR}/> }
-        {children}
-    </button>
-}
+    return (
+        <Button
+            fullWidth
+            sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 2,
+                textTransform: 'none',
+                justifyContent: 'flex-start',
+                paddingY: '8px',
+                paddingX: '16px',
+                color: isActive ? SIDEBAR_ITEM_ACTIVE_COLOR : SIDEBAR_ITEM_NO_ACTIVE_COLOR,
+                backgroundColor: isActive ? 'rgba(0, 0, 0, 0.04)' : 'transparent',
+                borderRadius: isActive ? '8px' : 'none',
+                "&:hover": {
+                    backgroundColor: 'rgba(0, 0, 0, 0.04)'
+                }
+            }}
+            onClick={() => onClick(value)}
+        >
+            {IconComponent && (
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Icon
+                        fontSize="inherit"
+                        sx={{
+                            color: isActive ? SIDEBAR_ITEM_ACTIVE_COLOR : SIDEBAR_ITEM_NO_ACTIVE_COLOR,
+                        }}
+                    >
+                        <IconComponent /> {/* Рендерим переданный компонент */}
+                    </Icon>
+                </Box>
+            )}
+            {children}
+        </Button>
+    );
+};

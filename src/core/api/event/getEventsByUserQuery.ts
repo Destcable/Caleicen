@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const LOGIN_MUTATION = gql`
+export const EVENTS_BY_USER_QUERY = gql`
     query GetEventsByUser($userId: ID!) {
         data: getEventsByUser(userId: $userId) {
             id

@@ -1,28 +1,38 @@
-import { FC } from "react"
+import { FC } from "react";
+import { Menu, MenuItem, Typography, Divider, Box } from "@mui/material";
 
 interface UserDropDownProps {
-    open: boolean
+    open: boolean;
+    anchorEl: HTMLElement | null;
+    onClose: () => void;
 }
 
-export const UserDropDown: FC<UserDropDownProps> = ({
-    open
-}) => {
-    if (!open) return null
-    return <div id="userDropdown" className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 mb-2">
-        <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
-            <div>Artem Pavlov</div>
-            <div className="font-medium truncate">artmobpavlov21@gmail.com</div>
-        </div>
-        <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
-            <li>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Настройки</a>
-            </li>
-            <li>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">О приложении</a>
-            </li>
-        </ul>
-        <div className="py-1">
-            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Выйти</a>
-        </div>
-    </div>
-}
+export const UserDropDown: FC<UserDropDownProps> = ({ open, anchorEl, onClose }) => {
+    return (
+        <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={onClose}
+            PaperProps={{
+                sx: {
+                    width: '220px',
+                    boxShadow: 1,
+                    borderRadius: 2,
+                    mt: 1,
+                    zIndex: 10,
+                    bgcolor: 'background.paper',
+                },
+            }}
+        >
+            <Box sx={{ px: 2, py: 1.5, backgroundColor: 'background.paper' }}>
+                <Typography variant="body1" color="text.primary">Artem Pavlov</Typography>
+                <Typography variant="body2" color="text.secondary" noWrap>artmobpavlov21@gmail.com</Typography>
+            </Box>
+            <Divider />
+            <MenuItem onClick={onClose}>Настройки</MenuItem>
+            <MenuItem onClick={onClose}>О приложении</MenuItem>
+            <Divider />
+            <MenuItem onClick={onClose}>Выйти</MenuItem>
+        </Menu>
+    );
+};

@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.4",
+    "@mui/material": "^6.1.4",
     "@types/react-big-calendar": "^1.8.12",
     "autoprefixer": "10.4.20",
     "graphql": "^16.9.0",

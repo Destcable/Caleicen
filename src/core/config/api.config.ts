@@ -1,1 +1,1 @@
-export const API_SERVER_URI = "http://localhost:4000";
+export const API_SERVER_URI = "https://innodigital-server.vercel.app/graphql";

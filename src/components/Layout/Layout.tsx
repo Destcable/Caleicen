@@ -32,8 +32,8 @@ const Layout = () => {
             icon={item.icon}
             iconSize={item.iconSize}
             onClick={handleClickSidebarItem}
+            label={item.label}
         >
-            {item.label}
         </SidebarItem>
     ));
 

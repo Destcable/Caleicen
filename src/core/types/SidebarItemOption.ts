@@ -5,6 +5,4 @@ export type SidebarItemOption = {
     value: string;
     icon: OverridableComponent<SvgIconTypeMap<object, "svg">>
     label: string,
-    iconSize: number,
-    color?: string
 }
